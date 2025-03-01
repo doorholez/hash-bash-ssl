@@ -95,7 +95,7 @@ function canonicalizeDN() {
 
 # Function to turn PEM into DER
 function getDERfromPEM () { #Returns HEX encoded DER of first PEM Certificate in file 
-  awk '/^-----BEGIN CERTIFICATE-----$/ {i=1} /^[A-Za-z0-9\/+=]+\r?$/ { if(i) print } /-----END CERTIFICATE-----/ {exit }' |tr -d '\r\n' |base64 -d |od -An -v -w0 -tx1 2>/dev/null |grep '^[0-9a-f ]*$' |tr -d "\n "
+  awk '/^-----BEGIN CERTIFICATE-----[\r|\n]*$/ {i=1} /^[A-Za-z0-9\/+=]+[\r|\n]*$/ { if(i) print } /-----END CERTIFICATE-----/ {exit }' |tr -d '\r\n' |base64 -d |od -An -v -w0 -tx1 2>/dev/null |grep '^[0-9a-f ]*$' |tr -d "\n "
 }
 
 declare -a PEMS
